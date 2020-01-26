@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Emgu;
 namespace Emgu_Csharp
 {
     public partial class Form1 : Form
@@ -19,7 +18,15 @@ namespace Emgu_Csharp
 
         private void button1_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
 
+                if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string selectedFile = openFileDialog.FileName;
+                }
+
+            }
         }
     }
 }
