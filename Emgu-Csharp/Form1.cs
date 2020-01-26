@@ -26,6 +26,7 @@ namespace Emgu_Csharp
             InitializeComponent();
         }
         public static Image<Bgr, Byte> img1;
+        public static Image<Bgr, Byte> img2;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,11 +36,51 @@ namespace Emgu_Csharp
                 if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     string selectedFile = openFileDialog.FileName;
+                    pictureBox1.Image = new Bitmap(selectedFile);
+
                     img1 = new Image<Bgr, Byte>(selectedFile);
 
                 }
 
+                
+            }
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+
+                if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string selectedFile = openFileDialog.FileName;
+                    pictureBox2.Image = new Bitmap(selectedFile);
+
+                    img2 = new Image<Bgr, Byte>(selectedFile);
+
+                }
+
+
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ExtractFeature(img1);
+            ExtractFeature(img2);
+
+        }
+
+        private void ExtractFeature(Image<Bgr, byte> img)
+        {
+            using (Image<Gray, Byte> model = new Image<Gray, byte>(img.Bitmap))
+            using (var modelMat = model.Mat.ToUMat(AccessType.Read))
+            using (var detector = new SURF(hessianThresh: 350))
+            {
+                var descriptor = new Mat();
+                var keyPoints = new VectorOfKeyPoint();
+                detector.DetectAndCompute(modelMat, null, keyPoints, descriptor, false);
             }
         }
     }
