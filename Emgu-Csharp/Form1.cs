@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Emgu;
 namespace Emgu_Csharp
 {
     public partial class Form1 : Form
