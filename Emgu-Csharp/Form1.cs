@@ -7,6 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using Emgu.CV.CvEnum;
+using System.Collections;
+using Emgu.CV.UI;
+using Emgu.CV.VideoSurveillance;
+using Emgu.CV.Features2D;
+using Emgu.CV.XFeatures2D;
+using Emgu.CV.Util;
+
 namespace Emgu_Csharp
 {
     public partial class Form1 : Form
@@ -15,6 +25,7 @@ namespace Emgu_Csharp
         {
             InitializeComponent();
         }
+        public static Image<Bgr, Byte> img1;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -24,7 +35,10 @@ namespace Emgu_Csharp
                 if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     string selectedFile = openFileDialog.FileName;
+                    img1 = new Image<Bgr, Byte>(selectedFile);
+
                 }
+
 
             }
         }
